@@ -2,24 +2,25 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace InternetShopCore.Models
 {
     public class GroupCategory
     {
-        public int Id { get; set; }
+        [Key]
+        public int GroupCategoryId { get; set; }
         public string Name { get; set; }
         public ICollection<Category> Categories { get; set; }
     }
 
     public class Category
     {
-        public int Id { get; set; }
+        [Key]
+        public int CategoryId { get; set; }
         public string Name { get; set; }
 
-        public int? GroupCategoryId { get; set; }
+        [ForeignKey("Category")]
+        public int GroupCategoryId { get; set; }
         public GroupCategory GroupCategory { get; set; }
 
         public ICollection<Product> Products { get; set; }
@@ -29,7 +30,8 @@ namespace InternetShopCore.Models
     {
         [Key]
         public int ProdId { get; set; }
-        public int? CategoryId { get; set; }
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
         public Category Category { get; set; }
         public string Name { get; set; }
         public string VendorCode { get; set; }
@@ -39,7 +41,8 @@ namespace InternetShopCore.Models
 
         public string Description { get; set; }
 
-        public int? ManufacturerId { get; set; }
+        [ForeignKey("Manufacturer")]
+        public int ManufacturerId { get; set; }
         public Manufacturer Manufacturer { get; set; }
 
         public ICollection<Image> Images { get; set; }
@@ -50,7 +53,8 @@ namespace InternetShopCore.Models
 
     public class Manufacturer
     {
-        public int Id { get; set; }
+        [Key]
+        public int ManufacturerId { get; set; }
         public string Name { get; set; }
 
         public ICollection<Product> Products { get; set; }
@@ -58,20 +62,24 @@ namespace InternetShopCore.Models
 
     public class Review
     {
+        [Key]
         public int Id { get; set; }
         public DateTime DateTimeReview { get; set; }
         public string NameAuthor { get; set; }
         public string CityAuthor { get; set; }
         public string Text { get; set; }
 
+        [ForeignKey("Product")]
         public int ProductId { get; set; }
         public Product Product { get; set; }
     }
 
     public class Image
     {
+        [Key]
         public int Id { get; set; }
-
+        
+        [ForeignKey("Product")]
         public int ProductId { get; set; }
         public Product Product { get; set; }
 
@@ -84,6 +92,17 @@ namespace InternetShopCore.Models
         [ForeignKey("Product")]
         public int ProdId { get; set; }
         public Product Product { get; set; }
-
+        public string OperationSystem { get; set; }
+        public string BodyProtect { get; set; }
+        public bool DualSimSupport { get; set; }
+        public int CoreCount { get; set; }
+        public string CPU_Frequency { get; set; }
+        public int RAM_Size { get; set; }
+        public int MemorySize { get; set; }
+        public string ScreenSize { get; set; }
+        public bool WorkIn4G { get; set; }
+        public string CameraResolution { get; set; }
+        public string BatteryCapacity { get; set; }
+        public string Color { get; set; }
     }
 }
