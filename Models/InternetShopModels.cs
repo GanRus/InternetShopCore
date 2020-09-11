@@ -9,6 +9,9 @@ namespace InternetShopCore.Models
     {
         [Key]
         public int GroupCategoryId { get; set; }
+
+        [Required (ErrorMessage = "Не указано наименование группы категорий товаров")]
+        [Display(Name = "Наименование")]
         public string Name { get; set; }
         public ICollection<Category> Categories { get; set; }
     }
@@ -17,8 +20,13 @@ namespace InternetShopCore.Models
     {
         [Key]
         public int CategoryId { get; set; }
+
+        [Display(Name = "Наименование")]
+        [Required(ErrorMessage = "Не указано наименование категории товаров")]
         public string Name { get; set; }
 
+        [Display(Name = "Группа категории")]
+        [Required(ErrorMessage = "Не выбрана группа категории")]
         [ForeignKey("Category")]
         public int GroupCategoryId { get; set; }
         public GroupCategory GroupCategory { get; set; }

@@ -6,6 +6,12 @@
 
 <h4>Добавить группу категорий товаров</h4>
 <hr />
+
+@if (TempData["success"] != null)
+{
+    <span class="text-success">@TempData["success"].ToString()</span>
+}
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AddGroupCategory">
