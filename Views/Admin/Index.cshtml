@@ -2,6 +2,23 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-<p>@Html.ActionLink("Добавить группу категорий", "AddGroupCategory")</p>
-<p>@Html.ActionLink("Добавить категорию продуктов", "AddCategory")</p>
-<p>@Html.ActionLink("Добавить продукт", "AddProduct")</p>
+
+<div class="container">
+    <h3>Страница администрирования</h3>
+    <hr />
+    <div class="row">
+
+        <div class="col-md-4">
+            <h4>Справочники</h4>
+            <a asp-action="GroupCategories" class="nav-link">Группы категорий продуктов</a>
+            <a asp-action="Categories" class="nav-link">Категории продуктов</a>
+            <a asp-action="Products" class="nav-link">Продукты</a>
+        </div>
+        <div class="col-md-4">
+            <h4>Добавить</h4>
+            <a asp-action="AddGroupCategory" class="nav-link">Добавить группу категорий</a>
+            <a asp-action="AddCategory" class="nav-link">Добавить категорию продуктов</a>
+            <a asp-action="AddProduct" class="nav-link">Добавить продукт</a>
+        </div>
+    </div>
+</div>

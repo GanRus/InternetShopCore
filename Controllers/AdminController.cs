@@ -62,5 +62,30 @@ namespace InternetShopCore.Controllers
 
             return RedirectToAction("AddCategory");
         }
+
+        [HttpGet]
+        public IActionResult AddProduct()
+        {
+            var categoryList = db.Categories.ToList();
+            ViewBag.CategoryList = new SelectList(categoryList, "GroupCategoryId", "Name");
+
+            var manufacturerList = db.Manufacturers.ToList();
+            ViewBag.ManufacturerList = new SelectList(manufacturerList, "ManufacturerId", "Name");
+
+            return View();
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> AddProduct([FromForm] Category category)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Categories.Add(category);
+        //        await db.SaveChangesAsync();
+        //        TempData["success"] = "Запись успешно добавлена";
+        //    }
+
+        //    return RedirectToAction("AddCategory");
+        //}
     }
 }

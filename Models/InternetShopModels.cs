@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,8 +11,8 @@ namespace InternetShopCore.Models
         [Key]
         public int GroupCategoryId { get; set; }
 
-        [Required (ErrorMessage = "Не указано наименование группы категорий товаров")]
         [Display(Name = "Наименование")]
+        [Required (ErrorMessage = "Не указано наименование группы категорий товаров")]
         public string Name { get; set; }
         public ICollection<Category> Categories { get; set; }
     }
@@ -38,25 +39,53 @@ namespace InternetShopCore.Models
     {
         [Key]
         public int ProdId { get; set; }
+
+        [Display(Name = "Наименование категории товара")]
+        [Required(ErrorMessage = "Не выбрана категория")]
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+        
+        [Display(Name = "Наименование товара")]
+        [Required(ErrorMessage = "Не указано наименование")]
         public string Name { get; set; }
+        
+        [Display(Name = "Артикул")]
+        [Required(ErrorMessage = "Не указан артикул")]
         public string VendorCode { get; set; }
+        
+        [Display(Name = "Цена")]
+        [Required(ErrorMessage = "Не указана цена")]
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
+
+        [Display(Name = "Количество товара")]
+        [Required(ErrorMessage = "Не указано количество товара")]
+        [DataType(DataType.Currency)]
         public int Count { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
         public int? Rating { get; set; }
 
+        [Display(Name = "Описание товара")]
+        [Required(ErrorMessage = "Опишите товар")]
         public string Description { get; set; }
 
+        [Display(Name = "Производитель")]
+        [Required(ErrorMessage = "Укажите производителя товара")]
         [ForeignKey("Manufacturer")]
         public int ManufacturerId { get; set; }
         public Manufacturer Manufacturer { get; set; }
 
+        [Display(Name = "Укажите изображение товара")]
+        [Required(ErrorMessage = "Необходимо указать изображение")]
         public ICollection<Image> Images { get; set; }
+
         public ICollection<Review> Reviews { get; set; }
 
-        public SmartPhoneProduct SmartPhoneProduct { get; set; }
+        public SmartPhoneProduct SmartPhoneProducts { get; set; }
+        public TabletPCProduct TabletPCProducts { get; set; }
+        public SmartWatchProduct SmartWatchProducts { get; set; }
     }
 
     public class Manufacturer
@@ -100,17 +129,52 @@ namespace InternetShopCore.Models
         [ForeignKey("Product")]
         public int ProdId { get; set; }
         public Product Product { get; set; }
+
+        [Display(Name = "Операционная система")]
+        [Required(ErrorMessage = "Не указана ОС")]
         public string OperationSystem { get; set; }
+        
+        [Display(Name = "Защита корпуса")]
         public string BodyProtect { get; set; }
+
+        [Display(Name = "Поддержка 2-х SIM-карт")]
+        [Required(ErrorMessage = "Необходимо указать поддержку")]
         public bool DualSimSupport { get; set; }
+
+        [Display(Name = "Количество ядер")]
+        [Required(ErrorMessage = "Необходимо указать количество ядер")]
         public int CoreCount { get; set; }
+
+        [Display(Name = "Частота процессора")]
+        [Required(ErrorMessage = "Необходимо указать частоту процессора")]
         public string CPU_Frequency { get; set; }
+
+        [Display(Name = "Объем оперативной памяти")]
+        [Required(ErrorMessage = "Необходимо указать объем оперативной памяти")]
         public int RAM_Size { get; set; }
+
+        [Display(Name = "Объем встроенной памяти")]
+        [Required(ErrorMessage = "Необходимо указать объем встроенной памяти")]
         public int MemorySize { get; set; }
+
+        [Display(Name = "Разрешение экрана")]
+        [Required(ErrorMessage = "Необходимо указать разрешение экрана")]
         public string ScreenSize { get; set; }
+
+        [Display(Name = "Работа в 4G(LTE)-сетях")]
+        [Required(ErrorMessage = "Необходимо указать поддержку 4G")]
         public bool WorkIn4G { get; set; }
+
+        [Display(Name = "Разрешение камеры")]
+        [Required(ErrorMessage = "Необходимо указать разрешение камеры")]
         public string CameraResolution { get; set; }
+
+        [Display(Name = "Емкость аккумуллятора")]
+        [Required(ErrorMessage = "Необходимо указать емкость аккумулятора")]
         public string BatteryCapacity { get; set; }
+
+        [Display(Name = "Количество ядер")]
+        [Required(ErrorMessage = "Необходимо указать количество ядер")]
         public string Color { get; set; }
     }
 
