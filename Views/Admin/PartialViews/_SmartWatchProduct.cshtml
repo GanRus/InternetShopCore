@@ -1,0 +1,93 @@
+﻿@model InternetShopCore.Models.SmartWatchProduct
+
+<h4>SmartWatchProduct</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="_SmartWatchProduct">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProdId" class="control-label"></label>
+                <select asp-for="ProdId" class ="form-control" asp-items="ViewBag.ProdId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notificatins" class="control-label"></label>
+                <input asp-for="Notificatins" class="form-control" />
+                <span asp-validation-for="Notificatins" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Monitoring" class="control-label"></label>
+                <input asp-for="Monitoring" class="form-control" />
+                <span asp-validation-for="Monitoring" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tracker" class="control-label"></label>
+                <input asp-for="Tracker" class="form-control" />
+                <span asp-validation-for="Tracker" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DisplayType" class="control-label"></label>
+                <input asp-for="DisplayType" class="form-control" />
+                <span asp-validation-for="DisplayType" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="HasSensorDisplay" /> @Html.DisplayNameFor(model => model.HasSensorDisplay)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScreenSize" class="control-label"></label>
+                <input asp-for="ScreenSize" class="form-control" />
+                <span asp-validation-for="ScreenSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScreenResolution" class="control-label"></label>
+                <input asp-for="ScreenResolution" class="form-control" />
+                <span asp-validation-for="ScreenResolution" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RAM_Size" class="control-label"></label>
+                <input asp-for="RAM_Size" class="form-control" />
+                <span asp-validation-for="RAM_Size" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="HasBluetooth" /> @Html.DisplayNameFor(model => model.HasBluetooth)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="SatelliteNavi" class="control-label"></label>
+                <input asp-for="SatelliteNavi" class="form-control" />
+                <span asp-validation-for="SatelliteNavi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TypeGlass" class="control-label"></label>
+                <input asp-for="TypeGlass" class="form-control" />
+                <span asp-validation-for="TypeGlass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProtectClass" class="control-label"></label>
+                <input asp-for="ProtectClass" class="form-control" />
+                <span asp-validation-for="ProtectClass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BodyColor" class="control-label"></label>
+                <input asp-for="BodyColor" class="form-control" />
+                <span asp-validation-for="BodyColor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WatchbandColor" class="control-label"></label>
+                <input asp-for="WatchbandColor" class="form-control" />
+                <span asp-validation-for="WatchbandColor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

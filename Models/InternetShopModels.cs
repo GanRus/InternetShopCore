@@ -142,6 +142,7 @@ namespace InternetShopCore.Models
         public bool DualSimSupport { get; set; }
 
         [Display(Name = "Количество ядер")]
+        [DataType(DataType.Currency)]
         [Required(ErrorMessage = "Необходимо указать количество ядер")]
         public int CoreCount { get; set; }
 
@@ -150,10 +151,12 @@ namespace InternetShopCore.Models
         public string CPU_Frequency { get; set; }
 
         [Display(Name = "Объем оперативной памяти")]
+        [DataType(DataType.Currency)]
         [Required(ErrorMessage = "Необходимо указать объем оперативной памяти")]
         public int RAM_Size { get; set; }
 
         [Display(Name = "Объем встроенной памяти")]
+        [DataType(DataType.Currency)]
         [Required(ErrorMessage = "Необходимо указать объем встроенной памяти")]
         public int MemorySize { get; set; }
 
@@ -173,8 +176,8 @@ namespace InternetShopCore.Models
         [Required(ErrorMessage = "Необходимо указать емкость аккумулятора")]
         public string BatteryCapacity { get; set; }
 
-        [Display(Name = "Количество ядер")]
-        [Required(ErrorMessage = "Необходимо указать количество ядер")]
+        [Display(Name = "Цвет корпуса")]
+        [Required(ErrorMessage = "Необходимо указать цвет корпуса")]
         public string Color { get; set; }
     }
 
@@ -184,19 +187,64 @@ namespace InternetShopCore.Models
         [ForeignKey("Product")]
         public int ProdId { get; set; }
         public Product Product { get; set; }
+
+        [Display(Name = "Операционная система")]
+        [Required(ErrorMessage = "Не указана ОС")]
         public string OperationSystem { get; set; }
+
+        [Display(Name = "Тип экрана")]
+        [Required(ErrorMessage = "Необходимо указать тип экрана")]
         public string ScreenType { get; set; }
+
+        [Display(Name = "Разрешение экрана")]
+        [Required(ErrorMessage = "Необходимо указать разрешение экрана")]
         public string ScreenSize { get; set; }
+
+        [Display(Name = "Модель процессора")]
+        [Required(ErrorMessage = "Необходимо указать модель процессора")]
         public string ModelCPU { get; set; }
+        
+        [Display(Name = "Частота процессора")]
+        [Required(ErrorMessage = "Необходимо указать частоту процессора")]
         public string CPU_Frequency { get; set; }
+
+        [Display(Name = "Количество ядер")]
+        [DataType(DataType.Currency)]
+        [Required(ErrorMessage = "Необходимо указать количество ядер")]
         public int CoreCount { get; set; }
+
+        [Display(Name = "Объем встроенной памяти")]
+        [DataType(DataType.Currency)]
+        [Required(ErrorMessage = "Необходимо указать объем встроенной памяти")]
         public int MemorySize { get; set; }
+
+        [Display(Name = "Объем оперативной памяти")]
+        [DataType(DataType.Currency)]
+        [Required(ErrorMessage = "Необходимо указать объем оперативной памяти")]
         public int RAM_Size { get; set; }
+
+        [Display(Name = "Наличие Wi-Fi модуля")]
+        [Required(ErrorMessage = "Необходимо указать наличие wi-fi модуля")]
         public bool HasWiFi { get; set; }
+
+        [Display(Name = "Работа в 3G-сетях")]
+        [Required(ErrorMessage = "Необходимо указать поддержку 3G")]
         public bool Has3G { get; set; }
+
+        [Display(Name = "Работа в 4G(LTE)-сетях")]
+        [Required(ErrorMessage = "Необходимо указать поддержку 4G")]
         public bool Has4G { get; set; }
+
+        [Display(Name = "Разрешение камеры")]
+        [Required(ErrorMessage = "Необходимо указать разрешение камеры")]
         public string CameraResolution { get; set; }
+
+        [Display(Name = "Разрешение фронтальной камеры")]
+        [Required(ErrorMessage = "Необходимо указать разрешение фронтальной камеры")]
         public string FrontCameraRes { get; set; }
+
+        [Display(Name = "Цвет корпуса")]
+        [Required(ErrorMessage = "Необходимо указать цвет корпуса")]
         public string Color { get; set; }
     }
 
@@ -206,16 +254,56 @@ namespace InternetShopCore.Models
         [ForeignKey("Product")]
         public int ProdId { get; set; }
         public Product Product { get; set; }
+
+        [Display(Name = "Уведомления")]
+        public string Notificatins { get; set; }
+
+        [Display(Name = "Мониторинг")]
+        [Required(ErrorMessage = "Необходимо указать список опций мониторинга")]
         public string Monitoring { get; set; }
+
+        [Display(Name = "Трекер")]
         public string Tracker { get; set; }
+
+        [Display(Name = "Тип дисплея")]
+        [Required(ErrorMessage = "Необходимо указать тип дисплея")]
         public string DisplayType { get; set; }
+
+        [Display(Name = "Сенсорный экран")]
         public bool HasSensorDisplay { get; set; }
+
+        [Display(Name = "Размер экрана")]
+        [Required(ErrorMessage = "Необходимо указать размер экрана")]
         public string ScreenSize { get; set; }
+
+        [Display(Name = "Разрешение экрана")]
+        [Required(ErrorMessage = "Необходимо указать разрешение экрана")]
         public string ScreenResolution { get; set; }
+
+        [Display(Name = "Объем оперативной памяти")]
+        [DataType(DataType.Currency)]
+        [Required(ErrorMessage = "Необходимо указать объем оперативной памяти")]
         public int RAM_Size { get; set; }
+
+        [Display(Name = "Наличие Bluetooth")]
         public bool HasBluetooth { get; set; }
+
+        [Display(Name = "Спутниковая навигация")]
+        public string SatelliteNavi { get; set; }
+
+        [Display(Name = "Тип стекла")]
+        [Required(ErrorMessage = "Необходимо указать тип стекла")]
         public string TypeGlass { get; set; }
+
+        [Display(Name = "Класс пыле-влагозащиты")]
+        public string ProtectClass { get; set; }
+
+        [Display(Name = "Цвет корпуса")]
+        [Required(ErrorMessage = "Необходимо указать цвет корпуса")]
         public string BodyColor { get; set; }
+
+        [Display(Name = "Цвет ремешка")]
+        [Required(ErrorMessage = "Необходимо указать цвет ремешка")]
         public string WatchbandColor { get; set; }
     }
 }

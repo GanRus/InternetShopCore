@@ -22,6 +22,8 @@ namespace InternetShopCore.Controllers
             return View();
         }
 
+        #region Добавление данных
+
         [HttpGet]
         public IActionResult AddGroupCategory()
         {
@@ -75,17 +77,17 @@ namespace InternetShopCore.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddProduct([FromForm] Category category)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Categories.Add(category);
-        //        await db.SaveChangesAsync();
-        //        TempData["success"] = "Запись успешно добавлена";
-        //    }
+        #endregion
 
-        //    return RedirectToAction("AddCategory");
-        //}
+        #region Справочники
+
+        public IActionResult GroupCategories()
+        {
+            var categoryList = db.GroupCategories.ToList();
+
+            return View(categoryList);
+        }
+
+        #endregion
     }
 }
