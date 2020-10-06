@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using InternetShopCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace InternetShopCore.Controllers
 {
@@ -84,6 +85,13 @@ namespace InternetShopCore.Controllers
         public IActionResult GroupCategories()
         {
             var categoryList = db.GroupCategories.ToList();
+
+            return View(categoryList);
+        }
+
+        public IActionResult Categories()
+        {
+            var categoryList = db.Categories.Include(c => c.GroupCategory).ToList();
 
             return View(categoryList);
         }

@@ -11,7 +11,7 @@ namespace InternetShopCore.Models
         [Key]
         public int GroupCategoryId { get; set; }
 
-        [Display(Name = "Наименование")]
+        [Display(Name = "Наименование группы")]
         [Required (ErrorMessage = "Не указано наименование группы категорий товаров")]
         public string Name { get; set; }
         public ICollection<Category> Categories { get; set; }

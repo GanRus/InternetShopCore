@@ -25,9 +25,8 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.GroupCategoryId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.GroupCategoryId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.GroupCategoryId">Delete</a>
+                <a asp-action="EditGroupCategory" asp-route-id="@item.GroupCategoryId">Редактировать</a> |
+                <a asp-action="DeleteGroupCategory" asp-route-id="@item.GroupCategoryId">Удалить</a>
             </td>
         </tr>
 }
