@@ -6,8 +6,17 @@
     ViewData["Title"] = "Категории";
 }
 
-<h1>Категории</h1>
+<h4>Категории</h4>
+<hr />
+@if (TempData["success"] != null)
+{
+    <p class="text-success">@TempData["success"].ToString()</p>
+}
 
+@if (TempData["error"] != null)
+{
+    <p class="text-danger">@TempData["error"].ToString()</p>
+}
 <p>
     <a asp-action="AddCategory">Добавить категорию</a>
 </p>
@@ -36,9 +45,13 @@
                 </td>
                 <td>
                     <a asp-action="EditCategory" asp-route-id="@item.CategoryId">Редактировать</a> |
-                    <a asp-action="DeleteCategory" asp-route-id="@item.CategoryId">Удалить</a>
+                    <a asp-action="DeleteCategory" asp-route-id="@item.CategoryId"
+                       onclick="return confirm('Вы уверены что хотите удалить выбранную категорию?')">Удалить</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<div>
+    <a asp-action="Index">Назад к списку</a>
+</div>

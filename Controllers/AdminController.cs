@@ -23,6 +23,24 @@ namespace InternetShopCore.Controllers
             return View();
         }
 
+        #region Справочники
+
+        public IActionResult GroupCategories()
+        {
+            var categoryList = db.GroupCategories.ToList();
+
+            return View(categoryList);
+        }
+
+        public IActionResult Categories()
+        {
+            var categoryList = db.Categories.Include(c => c.GroupCategory).ToList();
+
+            return View(categoryList);
+        }
+
+        #endregion
+
         #region Добавление данных
 
         [HttpGet]
@@ -47,10 +65,16 @@ namespace InternetShopCore.Controllers
         [HttpGet]
         public IActionResult AddCategory()
         {
-            var categoryList = db.GroupCategories.ToList();
-            ViewBag.GroupCategoryList = new SelectList(categoryList, "GroupCategoryId", "Name");
+            ViewBag.GroupCategoryList = GetCategoryList();
 
             return View();
+        }
+
+        private SelectList GetCategoryList()
+        {
+            var categoryList = db.GroupCategories.ToList();
+
+            return new SelectList(categoryList, "GroupCategoryId", "Name");
         }
 
         [HttpPost]
@@ -80,22 +104,120 @@ namespace InternetShopCore.Controllers
 
         #endregion
 
-        #region Справочники
+        #region Редактирование данных
 
-        public IActionResult GroupCategories()
+        [HttpGet]
+        public async Task<IActionResult> EditGroupCategory(int? id)
         {
-            var categoryList = db.GroupCategories.ToList();
+            if (id != null)
+            {
+                var groupCategory = await db.GroupCategories.FirstOrDefaultAsync(p => p.GroupCategoryId == id);
 
-            return View(categoryList);
+                if (groupCategory != null)
+                    return View(groupCategory);
+            }
+
+            return NotFound();
         }
 
-        public IActionResult Categories()
+        [HttpPost]
+        public async Task<IActionResult> EditGroupCategory([FromForm] GroupCategory groupCategory)
         {
-            var categoryList = db.Categories.Include(c => c.GroupCategory).ToList();
+            db.GroupCategories.Update(groupCategory);
+            await db.SaveChangesAsync();
 
-            return View(categoryList);
+            return RedirectToAction("GroupCategories");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditCategory(int? id)
+        {
+            if (id != null)
+            {
+                var category = await db.Categories.FirstOrDefaultAsync(p => p.CategoryId == id);
+
+                ViewBag.GroupCategoryList = GetCategoryList();
+
+                if (category != null)
+                    return View(category);
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditCategory([FromForm] Category category)
+        {
+            db.Categories.Update(category);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Categories");
         }
 
         #endregion
+
+        #region Удаление данных
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteGroupCategory(int? id)
+        {
+            if (id != null)
+            {
+                var groupCategory = await db.GroupCategories.FirstOrDefaultAsync(p => p.GroupCategoryId == id);
+
+                if (groupCategory != null)
+                {
+                    //перед удалением делаем проверку на наличие связанных записей в таблице категорий
+                    var category = await db.Categories.FirstOrDefaultAsync(p => p.GroupCategoryId == groupCategory.GroupCategoryId);
+
+                    if (category != null)
+                    {
+                        TempData["error"] = "Невозможно удалить запись, так как имеются связанные записи в таблице категорий";
+                        return RedirectToAction("GroupCategories");
+                    }
+
+                    db.GroupCategories.Remove(groupCategory);
+                    await db.SaveChangesAsync();
+
+                    TempData["success"] = "Запись успешно удалена";
+                }
+
+                return RedirectToAction("GroupCategories");
+            }
+
+            return NotFound();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteCategory(int? id)
+        {
+            if (id != null)
+            {
+                var category = await db.Categories.FirstOrDefaultAsync(p => p.CategoryId == id);
+
+                if (category != null)
+                {
+                    //перед удалением делаем проверку на наличие связанных записей в таблице категорий
+                    var product = await db.Products.FirstOrDefaultAsync(p => p.CategoryId == category.CategoryId);
+
+                    if (product != null)
+                    {
+                        TempData["error"] = "Невозможно удалить запись, так как имеются связанные записи в таблице продуктов";
+                        return RedirectToAction("Categories");
+                    }
+
+                    db.Categories.Remove(category);
+                    await db.SaveChangesAsync();
+
+                    TempData["success"] = "Запись успешно удалена";
+                }
+
+                return RedirectToAction("Categories");
+            }
+
+            return NotFound();
+        }
+        #endregion
+
     }
 }
