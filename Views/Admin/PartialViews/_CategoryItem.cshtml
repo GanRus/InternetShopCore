@@ -1,0 +1,8 @@
+﻿@model InternetShopCore.Models.Category
+
+<div class="form-group">
+    <select asp-for="CategoryId" asp-items="ViewBag.CategoryItemList" class="form-control">
+        <option disabled selected>--- SELECT ---</option>
+    </select>
+    @*<span asp-validation-for="CategoryId" class="text-danger"></span>*@
+</div>

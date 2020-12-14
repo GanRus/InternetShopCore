@@ -1,0 +1,7 @@
+﻿@model InternetShopCore.Models.GroupCategory
+
+<label asp-for="Name" class="control-label"></label>
+<select asp-for="GroupCategoryId" asp-items="ViewBag.GroupCategoryList" class="form-control">
+    <option disabled selected>--- SELECT ---</option>
+</select>
+<span asp-validation-for="GroupCategoryId" class="text-danger"></span>

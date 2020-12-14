@@ -9,6 +9,7 @@ namespace InternetShopCore.Models
     public class GroupCategory
     {
         [Key]
+        [Required(ErrorMessage = "Не выбрана группа категории")]
         public int GroupCategoryId { get; set; }
 
         [Display(Name = "Наименование группы")]

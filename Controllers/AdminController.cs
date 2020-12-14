@@ -27,14 +27,14 @@ namespace InternetShopCore.Controllers
 
         public IActionResult GroupCategories()
         {
-            var categoryList = db.GroupCategories.ToList();
+            var categoryList = db.GroupCategories.OrderBy(c => c.Name).ToList();
 
             return View(categoryList);
         }
 
         public IActionResult Categories()
         {
-            var categoryList = db.Categories.Include(c => c.GroupCategory).ToList();
+            var categoryList = db.Categories.Include(c => c.GroupCategory).OrderBy(c => c.GroupCategory.Name).ToList();
 
             return View(categoryList);
         }
@@ -93,13 +93,26 @@ namespace InternetShopCore.Controllers
         [HttpGet]
         public IActionResult AddProduct()
         {
+            var groupCategoryList = db.GroupCategories.ToList();
+            ViewBag.GroupCategoryList = new SelectList(groupCategoryList, "GroupCategoryId", "Name");
+
             var categoryList = db.Categories.ToList();
-            ViewBag.CategoryList = new SelectList(categoryList, "GroupCategoryId", "Name");
+            ViewBag.CategoryList = new SelectList(categoryList, "CategoryId", "Name");
 
             var manufacturerList = db.Manufacturers.ToList();
             ViewBag.ManufacturerList = new SelectList(manufacturerList, "ManufacturerId", "Name");
 
             return View();
+        }
+
+        //частичное представление для замены выпадающего списка категорий в зависимости от выбранной группы категорий
+        public IActionResult GetCategoryItems(int id)
+        {
+            //return PartialView(db.Categories.Where(c => c.GroupCategoryId == id).ToList());
+            var categoryItemList = db.Categories.Where(c => c.GroupCategoryId == id).ToList();
+            ViewBag.CategoryItemList = new SelectList(categoryItemList, "CategoryId", "Name");
+
+            return PartialView("~/Views/Admin/PartialViews/_CategoryItem.cshtml");
         }
 
         #endregion
@@ -197,7 +210,7 @@ namespace InternetShopCore.Controllers
 
                 if (category != null)
                 {
-                    //перед удалением делаем проверку на наличие связанных записей в таблице категорий
+                    //перед удалением делаем проверку на наличие связанных записей в таблице продуктов
                     var product = await db.Products.FirstOrDefaultAsync(p => p.CategoryId == category.CategoryId);
 
                     if (product != null)

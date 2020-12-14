@@ -17,6 +17,9 @@
         <form asp-action="AddProduct">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                @await Html.PartialAsync("~/Views/Admin/PartialViews/_GetGroupCategoryList.cshtml")
+            </div>
+            <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
                 <select asp-for="CategoryId" asp-items="ViewBag.CategoryList" class="form-control">
                     <option disabled selected>--- SELECT ---</option>
@@ -69,4 +72,21 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $(function () {
+
+            $('#GroupCategoryId').change(function () {
+                //получаем выбранный id
+                var id = $(this).val();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetCategoryItems")/' + id,
+                    success: function (data) {
+                        //заменяем содержимое присланным частичным представлением
+                        $('#CategoryId').replaceWith(data);
+                    }
+                })
+            })
+        })
+    </script>
 }
